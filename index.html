@@ -3,11 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>正方形のグリッド</title>
+    <title>Bookmark & ToDo</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="header.css">
 </head>
 <body>
+    <!-- 切り替えボタン -->
+    <div id="nav-bar">
+        <button id="bookmark-button">Bookmark</button>
+        <button id="todo-button">ToDo</button>
+    </div>
+
+    <!-- Bookmarkページ -->
     <div id="grid-container"></div>
+
+    <!-- ToDoリストページ -->
+    <div id="todo-container" style="display: none;">
+        <div id="todo-box">
+            <h2>ToDo リスト</h2>
+            <ul id="todo-list"></ul>
+            <button id="add-task-button" class="plus-button">+</button>
+        </div>
+    </div>
+
     <div id="dialog" class="dialog">
         <h2>情報を入力</h2>
         <label for="input-url">URL:</label>

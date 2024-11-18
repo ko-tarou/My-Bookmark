@@ -1,10 +1,12 @@
 /* 全体のレイアウト */
-body {
+body{
+    color: #ffffff;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 0;
+    padding-top: 60px;
     background-color: #d3d3d3;
     overflow-x: hidden; /* 横スクロールを無効化 */
 }
@@ -159,4 +161,132 @@ body {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ToDoリストのエリア */
+
+* {
+    box-sizing: border-box; /* パディングとボーダーを要素のサイズに含める */
+    margin: 0;
+    padding: 0;
+}
+
+#todo-box h2 {
+    color: #ffffff; /* タイトルも白く */
+}
+
+#todo-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 700px;
+    background-color: #625e5e;
+    border: 2px solid #ffffff; /* 白い線で囲む */
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 軽い影を追加 */
+}
+
+/* タスクリスト */
+#todo-list {
+    width: 100%;
+    height: calc(100% - 50px); /* 上部タイトルとボタンの高さを引く */
+    list-style: none;
+    padding: 10px;
+    margin: 0;
+    overflow-y: auto; /* スクロール可能に */
+    background-color: #625e5e; 
+    border: 2px solid #ffffff; /* 白い枠線を追加 */
+    border-radius: 5px; /* 角を丸く */
+}
+
+/* タスクアイテム */
+#todo-list li {
+    color: #ffffff;
+    padding: 8px;
+    margin: 4px 0;
+    border: 2px solid #ffffff;
+    border-radius: 3px;
+    background-color: #625e5e; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 軽い影を追加 */
+}
+
+/* ToDoリスト専用の追加ボタン */
+#todo-container .plus-button {
+    position: absolute;
+    bottom: 15px; /* 枠線から少し上にずらす */
+    right: 15px; /* 枠線から少し左にずらす */
+    width: 60px; /* 大きなボタンサイズ */
+    height: 60px;
+    background-color: transparent;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 32px; /* フォントサイズも拡大 */
+    line-height: 32px;
+}
+
+#todo-container .plus-button:hover {
+    transform: scale(1.05); /* 少し大きくなる */
+    background-color: rgba(255, 255, 255, 0.1); /* 背景色の変化 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 影を追加して立体感を演出 */
+    border-color: #87ceeb; /* ボーダーの色を変更 */
+}
+
+/* タスク削除ボタン */
+#todo-list li button {
+    background-color: #625e5e;
+    color: #ffffff; /* テキスト色を白に設定 */
+    border: 2px solid #ffffff; /* 白い枠線を追加 */
+    border-radius: 5px; /* 角を丸く */
+    padding: 5px 10px; /* ボタン内の余白を設定 */
+    cursor: pointer; /* ポインタを表示 */
+    font-size: 14px; /* ボタンの文字サイズ */
+    transition: all 0.2s ease; /* なめらかな変化を追加 */
+}
+
+/* 削除ボタンのホバー効果 */
+#todo-list li button:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* ホバー時の背景色を薄い白に */
+    border-color: #87ceeb; /* 枠線をスカイブルーに */
+    transform: scale(1.05); /* 少し大きくなる */
+}
+
+/* 削除ボタンのアクティブ時の効果 */
+#todo-list li button:active {
+    background-color: #d6d6d6; /* アクティブ時の背景色を濃い灰色に */
+    border-color: #ffffff; /* 枠線を白に戻す */
+    transform: scale(1); /* サイズを元に戻す */
 }
