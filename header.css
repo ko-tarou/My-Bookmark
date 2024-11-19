@@ -1,0 +1,50 @@
+/* ヘッダー全体 */
+#nav-bar {
+    position: fixed; /* ヘッダーを画面の上部に固定 */
+    top: 0;
+    left: 0;
+    width: 100%; /* 横幅いっぱいに広げる */
+    height: 60px; /* 高さを設定 */
+    display: flex;
+    justify-content: center; /* ボタンを中央揃え */
+    align-items: center;
+    gap: 20px; /* ボタン間の間隔 */
+    padding: 0 20px;
+    transition: background-color 0.3s ease; /* 背景色の変更をスムーズに */
+    z-index: 1000; /* 他の要素の上に表示 */
+}
+
+/* ボタンのスタイル */
+#nav-bar button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: transparent;
+    border: 2px solid #ffffff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease; /* ホバー時の変化をスムーズに */
+}
+
+/* ボタンのホバー効果 */
+#nav-bar button:hover {
+    background-color: #ffffff; /* 背景色を白に変更 */
+    color: var(--page-color); /* ページごとの色をテキストに反映 */
+    transform: scale(1.05); /* 少し大きくなる */
+}
+
+
+body {
+    overflow-y: scroll; /* 常にスクロールバーを表示（非アクティブでも表示） */
+    overflow-x: hidden; /* 横スクロールを無効化 */
+    transition: background-color 0.3s ease;
+}
+
+html::-webkit-scrollbar {
+    display: none; /* Webkitブラウザ（Chrome, Edge, Safari）でスクロールバーを非表示 */
+}
+
+body {
+    -ms-overflow-style: none; /* IE, Edge */
+    scrollbar-width: none; /* Firefox */
+}

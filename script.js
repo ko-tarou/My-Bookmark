@@ -1,4 +1,67 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const bookmarkButton = document.getElementById('bookmark-button');
+    const todoButton = document.getElementById('todo-button');
+    const navBar = document.getElementById('nav-bar');
+    const gridContainer = document.getElementById('grid-container');
+    const todoContainer = document.getElementById('todo-container');
+    const body = document.body;
+
+    // ページごとの色
+    const bookmarkColor = "#d3d3d3"; // Bookmarkのヘッダー背景
+    const todoColor = "#625e5e"; // ToDoのヘッダー背景
+    const bookmarkBgColor = "#d3d3d3"; // Bookmarkの背景
+    const todoBgColor = "#625e5e"; // ToDoの背景
+
+    const changePage = (showGrid, navColor, bgColor) => {
+        // 表示するコンテナの切り替え
+        gridContainer.style.display = showGrid ? 'block' : 'none';
+        todoContainer.style.display = showGrid ? 'none' : 'block';
+
+        // 背景色とヘッダー色を同時に変更
+        navBar.style.backgroundColor = navColor;
+        body.style.backgroundColor = bgColor;
+    };
+
+    // Bookmarkページに切り替え
+    bookmarkButton.addEventListener('click', () => {
+        changePage(true, bookmarkColor, bookmarkBgColor);
+    });
+
+    // ToDoページに切り替え
+    todoButton.addEventListener('click', () => {
+        changePage(false, todoColor, todoBgColor);
+    });
+
+    // 初期状態をBookmarkに設定
+    changePage(true, bookmarkColor, bookmarkBgColor);
+});
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const bookmarkButton = document.getElementById('bookmark-button');
+    const todoButton = document.getElementById('todo-button');
+    const body = document.body;
+    const gridContainer = document.getElementById('grid-container');
+    const todoContainer = document.getElementById('todo-container');
+
+    // Bookmarkページに切り替え
+    bookmarkButton.addEventListener('click', () => {
+        gridContainer.style.display = 'block';
+        todoContainer.style.display = 'none';
+        body.style.backgroundColor = '#d3d3d3'; // Bookmark用の背景色
+    });
+
+    // ToDoページに切り替え
+    todoButton.addEventListener('click', () => {
+        gridContainer.style.display = 'none';
+        todoContainer.style.display = 'block';
+        body.style.backgroundColor = '#625e5e'; // ToDo用の背景色
+    });
+});
+
+
+//bookmark
+document.addEventListener('DOMContentLoaded', () => {
     const gridContainer = document.getElementById('grid-container');
     const dialog = document.getElementById('dialog');
     const inputUrl = document.getElementById('input-url');
@@ -133,3 +196,48 @@ document.addEventListener('DOMContentLoaded', () => {
         dialog.style.display = 'none';
     });
 });
+
+
+
+//todo
+document.addEventListener('DOMContentLoaded', () => {
+    const bookmarkButton = document.getElementById('bookmark-button');
+    const todoButton = document.getElementById('todo-button');
+    const gridContainer = document.getElementById('grid-container');
+    const todoContainer = document.getElementById('todo-container');
+    const todoList = document.getElementById('todo-list');
+    const addTaskButton = document.getElementById('add-task-button');
+
+    // ページ切り替えロジック
+    bookmarkButton.addEventListener('click', () => {
+        gridContainer.style.display = 'block';
+        todoContainer.style.display = 'none';
+    });
+
+    todoButton.addEventListener('click', () => {
+        gridContainer.style.display = 'none';
+        todoContainer.style.display = 'block';
+    });
+
+    // ToDoリストのタスク追加ロジック
+    addTaskButton.addEventListener('click', () => {
+        const task = prompt('新しいタスクを入力してください:');
+        if (task) {
+            const listItem = document.createElement('li');
+            listItem.textContent = task;
+
+            // 削除ボタンを作成
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = '×';
+            deleteButton.style.marginLeft = '10px';
+            deleteButton.addEventListener('click', () => {
+                todoList.removeChild(listItem);
+            });
+
+            listItem.appendChild(deleteButton);
+            todoList.appendChild(listItem);
+        }
+    });
+});
+
+
