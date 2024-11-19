@@ -1,0 +1,85 @@
+#grid-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100vw;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.row-group {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* 6列構成 */
+    gap: 10px;
+}
+
+.title-row {
+    grid-column: 1 / -1; /* グリッド全体の幅 */
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    font-size: 60px;
+}
+
+.square {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%; /* 正方形を維持 */
+    border: 1px solid #fff;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: hidden;
+    flex-direction: column;
+    transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+}
+
+.square:hover {
+    transform: scale(1.05);
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-color: #87ceeb;
+}
+
+.title {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 22px;
+    color: white;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    pointer-events: none;
+}
+
+.plus-button, .delete-button {
+    position: absolute;
+    bottom: 5px;
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 18px;
+    transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+}
+
+.plus-button:hover, .delete-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-color: #87ceeb;
+}
+
+.delete-button:hover {
+    background-color: rgba(255, 0, 0, 0.1);
+}
