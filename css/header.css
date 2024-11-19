@@ -32,19 +32,3 @@
     color: var(--page-color); /* ページごとの色をテキストに反映 */
     transform: scale(1.05); /* 少し大きくなる */
 }
-
-
-body {
-    overflow-y: scroll; /* 常にスクロールバーを表示（非アクティブでも表示） */
-    overflow-x: hidden; /* 横スクロールを無効化 */
-    transition: background-color 0.3s ease;
-}
-
-html::-webkit-scrollbar {
-    display: none; /* Webkitブラウザ（Chrome, Edge, Safari）でスクロールバーを非表示 */
-}
-
-body {
-    -ms-overflow-style: none; /* IE, Edge */
-    scrollbar-width: none; /* Firefox */
-}
