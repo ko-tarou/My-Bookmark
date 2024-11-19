@@ -1,0 +1,26 @@
+body {
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding-top: 60px;
+    background-color: #d3d3d3;
+    overflow-x: hidden;
+}
+
+* {
+    box-sizing: border-box; /* 全要素に適用 */
+    margin: 0;
+    padding: 0;
+}
+
+html::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    -ms-overflow-style: none; /* IE, Edge */
+    scrollbar-width: none; /* Firefox */
+}
