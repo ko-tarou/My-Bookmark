@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const changePage = (showGrid, navColor) => {
         gridContainer.style.display = showGrid ? 'block' : 'none';
-        todoContainer.style.display = showGrid ? 'none' : 'block';
+        todoContainer.style.display = showGrid ? 'none' : 'flex';
         body.style.backgroundColor = navColor;
     };
 
