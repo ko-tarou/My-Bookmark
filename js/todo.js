@@ -12,44 +12,43 @@ document.addEventListener('DOMContentLoaded', () => {
         const loadTasks = () => {
             const savedTasks = JSON.parse(localStorage.getItem(storageKey)) || [];
             savedTasks.forEach(task => {
-                addTaskToList(task);
+                addTaskToList(task.text, task.dueDate);
             });
-        };
-
-        // ローカルストレージからタイトルをロード
-        const loadTitle = () => {
-            const savedTitle = localStorage.getItem(titleStorageKey);
-            if (savedTitle) {
-                titleElement.textContent = savedTitle;
-            }
         };
 
         // タスクをローカルストレージに保存
         const saveTasks = () => {
-            const tasks = Array.from(todoList.querySelectorAll('.todo-item span')).map(span => span.textContent);
+            const tasks = Array.from(todoList.querySelectorAll('.todo-item')).map(item => ({
+                text: item.querySelector('.task-text').textContent,
+                dueDate: item.querySelector('.due-date')?.textContent || ''
+            }));
             localStorage.setItem(storageKey, JSON.stringify(tasks));
         };
 
-        // タイトルをローカルストレージに保存
-        const saveTitle = () => {
-            localStorage.setItem(titleStorageKey, titleElement.textContent);
-        };
-
         // タスクをリストに追加する共通関数
-        const addTaskToList = (task) => {
+        const addTaskToList = (taskText, dueDate = '') => {
             const listItem = document.createElement('li'); // タスク要素を作成
             listItem.classList.add('todo-item'); // クラスを追加してスタイリング対応
+            listItem.style.display = 'flex';
+            listItem.style.flexDirection = 'column'; // タスクと期限を上下に配置
 
-            // タスク名をテキスト部分として追加
-            const taskText = document.createElement('span');
-            taskText.textContent = task;
-            taskText.style.flex = '1'; // テキスト部分を伸縮可能に設定
+            // タスク名と削除ボタンの行
+            const taskRow = document.createElement('div');
+            taskRow.style.display = 'flex';
+            taskRow.style.justifyContent = 'space-between';
+            taskRow.style.alignItems = 'center';
+            taskRow.style.marginBottom = '5px';
 
-            // 削除ボタンを作成
+            const taskSpan = document.createElement('span');
+            taskSpan.textContent = taskText;
+            taskSpan.classList.add('task-text'); // テキスト用クラス
+            taskSpan.style.flex = '1'; // テキスト部分を伸縮可能に設定
+
             const deleteButton = document.createElement('button');
             deleteButton.textContent = '×'; // 削除ボタンのラベル
             deleteButton.classList.add('delete-button'); // クラスを追加
             deleteButton.setAttribute('aria-label', 'タスクを削除');
+            deleteButton.style.marginLeft = '10px';
 
             // 削除ボタンのクリックイベント
             deleteButton.addEventListener('click', () => {
@@ -57,9 +56,56 @@ document.addEventListener('DOMContentLoaded', () => {
                 saveTasks(); // ローカルストレージを更新
             });
 
-            // タスクアイテムにテキストと削除ボタンを追加
-            listItem.appendChild(taskText);
-            listItem.appendChild(deleteButton);
+            taskRow.appendChild(taskSpan);
+            taskRow.appendChild(deleteButton);
+
+            // 期限と期限ボタンの行
+            const dueRow = document.createElement('div');
+            dueRow.style.display = 'flex';
+            dueRow.style.justifyContent = 'space-between';
+            dueRow.style.alignItems = 'center';
+
+            const dueDateElement = document.createElement('span');
+            dueDateElement.textContent = dueDate ? `${dueDate}` : '期限未設定';
+            dueDateElement.classList.add('due-date');
+
+            const setDateButton = document.createElement('button');
+            setDateButton.textContent = '📅'; // カレンダーアイコン
+            setDateButton.classList.add('set-date-button');
+            setDateButton.setAttribute('aria-label', '期限を設定');
+            setDateButton.style.marginLeft = '10px';
+
+            // 期限設定ボタンのクリックイベント
+            setDateButton.addEventListener('click', () => {
+                const datePicker = document.createElement('input');
+                datePicker.type = 'date'; // 日付入力用
+                datePicker.style.position = 'absolute'; // カレンダーを表示位置に配置
+                datePicker.style.left = '0';
+                datePicker.style.zIndex = '1000';
+                listItem.appendChild(datePicker); // 一時的にリストアイテムに追加
+
+                datePicker.focus(); // カレンダーを開く
+
+                datePicker.addEventListener('change', () => {
+                    const selectedDate = datePicker.value; // 選択された日付を取得
+                    dueDateElement.textContent = `${selectedDate}`;
+                    listItem.removeChild(datePicker); // カレンダーを削除
+                    saveTasks(); // ローカルストレージを更新
+                });
+
+                datePicker.addEventListener('blur', () => {
+                    if (listItem.contains(datePicker)) {
+                        listItem.removeChild(datePicker);
+                    }
+                });
+            });
+
+            dueRow.appendChild(dueDateElement);
+            dueRow.appendChild(setDateButton);
+
+            // タスクアイテムに行を追加
+            listItem.appendChild(taskRow);
+            listItem.appendChild(dueRow);
 
             // タスクをリストに追加
             todoList.appendChild(listItem);
@@ -70,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const newTitle = prompt(`新しいタイトルを入力してください (Box ${index + 1}):`, titleElement.textContent);
             if (newTitle !== null) {
                 titleElement.textContent = newTitle.trim();
-                saveTitle(); // ローカルストレージを更新
+                localStorage.setItem(titleStorageKey, titleElement.textContent);
             }
         });
 
@@ -87,6 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // ページ読み込み時にタスクとタイトルをロード
         loadTasks();
-        loadTitle();
+        const savedTitle = localStorage.getItem(titleStorageKey);
+        if (savedTitle) titleElement.textContent = savedTitle;
     });
 });
