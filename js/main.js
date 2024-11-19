@@ -10,12 +10,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const changePage = (showGrid, navColor) => {
         gridContainer.style.display = showGrid ? 'block' : 'none';
-        todoContainer.style.display = showGrid ? 'none' : 'block';
+        todoContainer.style.display = showGrid ? 'none' : 'flex';
         body.style.backgroundColor = navColor;
     };
 
-    bookmarkButton.addEventListener('click', () => changePage(true, bookmarkColor));
-    todoButton.addEventListener('click', () => changePage(false, todoColor));
+    const updateAriaPressed = (buttonToActivate, buttonToDeactivate) => {
+        buttonToActivate.setAttribute('aria-pressed', 'true');
+        buttonToDeactivate.setAttribute('aria-pressed', 'false');
+    };
 
-    changePage(true, bookmarkColor); // 初期表示をBookmarkに設定
+    const updateButtonState = (activeButton, inactiveButton) => {
+        activeButton.disabled = true;
+        inactiveButton.disabled = false;
+    };
+
+    const initializePage = () => {
+        changePage(true, bookmarkColor);
+        updateAriaPressed(bookmarkButton, todoButton);
+        updateButtonState(bookmarkButton, todoButton);
+    };
+
+    bookmarkButton.addEventListener('click', () => {
+        changePage(true, bookmarkColor);
+        updateAriaPressed(bookmarkButton, todoButton);
+        updateButtonState(bookmarkButton, todoButton);
+    });
+
+    todoButton.addEventListener('click', () => {
+        changePage(false, todoColor);
+        updateAriaPressed(todoButton, bookmarkButton);
+        updateButtonState(todoButton, bookmarkButton);
+    });
+
+    initializePage();
 });

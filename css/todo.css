@@ -1,8 +1,31 @@
-#todo-box {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+/* todo-container */
+#todo-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px; /* ボックス間のスペース */
+    padding: 20px;
+    background-color: #625e5e;
+    flex-wrap: wrap; /* 必要に応じて折り返し */
+}
+
+/* タスクリストアイテム */
+.todo-item {
+    color: #ffffff;
+    padding: 8px 10px;
+    margin: 4px 0;
+    border: 2px solid #ffffff;
+    border-radius: 3px;
+    background-color: #625e5e;
+    display: flex; /* Flexboxでレイアウトを調整 */
+    justify-content: space-between; /* テキストと削除ボタンを左右に配置 */
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* todo-box */
+.todo-box {
+    position: relative; /* ボタンの絶対位置指定に対応 */
     width: 300px;
     height: 700px;
     background-color: #625e5e;
@@ -10,15 +33,16 @@
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     padding: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-#todo-list {
+/* todo-list */
+.todo-list {
     width: 100%;
-    height: calc(100% - 50px);
+    height: calc(100% - 60px); /* ボタン分のスペースを確保 */
     list-style: none;
     padding: 10px;
     margin: 0;
@@ -28,15 +52,16 @@
     border-radius: 5px;
 }
 
+/* タスクリストアイテム */
 #todo-list li {
     color: #ffffff;
-    padding: 8px;
+    padding: 8px 10px; /* 右側のスペースを確保 */
     margin: 4px 0;
     border: 2px solid #ffffff;
     border-radius: 3px;
     background-color: #625e5e;
-    display: flex;
-    justify-content: space-between;
+    display: flex; /* Flexboxで内包要素を整列 */
+    justify-content: space-between; /* テキストとボタンを左右に分離 */
     align-items: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -48,4 +73,116 @@
     width: 60px;
     height: 60px;
     font-size: 32px;
+}
+
+#todo-list li button {
+    background-color: #625e5e;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#todo-list li button:hover {
+    background-color: #d3d3d3;
+    color: #ffffff;
+}
+
+#todo-list li button:active {
+    background-color: #b0b0b0;
+    color: #ffffff;
+    transform: scale(0.95);
+}
+
+.plus-button {
+    position: absolute;
+    bottom: 15px; /* ボックスの底から15px */
+    width: 60px;
+    height: 60px;
+    font-size: 32px;
+    background-color: #ffffff;
+    color: #625e5e;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.plus-button:hover {
+    background-color: #d3d3d3;
+}
+
+.plus-button:active {
+    transform: scale(0.95);
+}
+
+
+/* 削除ボタン */
+.delete-button {
+    background-color: #625e5e;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, color 0.3s;
+    margin-left: 10px; /* テキストとの間にスペースを追加 */
+}
+
+.delete-button:hover {
+    background-color: #d3d3d3;
+    color: #ffffff;
+}
+
+.delete-button:active {
+    background-color: #b0b0b0;
+    color: #ffffff;
+    transform: scale(0.95);
+}
+
+.delete-button {
+    position: static; /* 絶対配置を無効に */
+}
+
+/* 追加ボタン */
+.plus-button {
+    position: absolute;
+    bottom: 15px; /* ボックスの底から15px */
+    width: 60px;
+    height: 60px;
+    font-size: 32px;
+    background-color: #625e5e; /* 背景色を明るく */
+    color: #ffffff; /* テキスト色を反転 */
+    border: 2px solid #ffffff; /* 境界線をタスクと統一 */
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.plus-button:hover {
+    background-color: #d3d3d3;
+    color: #ffffff; /* ホバー時に色を反転 */
+}
+
+.plus-button:active {
+    background-color: #b0b0b0;
+    transform: scale(0.95);
 }
