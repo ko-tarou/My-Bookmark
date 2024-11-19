@@ -10,19 +10,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // ローカルストレージからタスクをロード
         const loadTasks = () => {
+            // ストレージからタスクを取得
             const savedTasks = JSON.parse(localStorage.getItem(storageKey)) || [];
             savedTasks.forEach(task => {
+                // 保存されたオブジェクトから `text` と `dueDate` を渡してタスクを追加
                 addTaskToList(task.text, task.dueDate);
             });
         };
 
         // タスクをローカルストレージに保存
         const saveTasks = () => {
+            // 現在のリストからタスクデータを収集し、ローカルストレージに保存
             const tasks = Array.from(todoList.querySelectorAll('.todo-item')).map(item => ({
-                text: item.querySelector('.task-text').textContent,
-                dueDate: item.querySelector('.due-date')?.textContent || ''
+                text: item.querySelector('.task-text').textContent, // タスク名
+                dueDate: item.querySelector('.due-date').textContent.replace('期限: ', '') // 期限
             }));
-            localStorage.setItem(storageKey, JSON.stringify(tasks));
+            localStorage.setItem(storageKey, JSON.stringify(tasks)); // ローカルストレージに保存
         };
 
         // タスクをリストに追加する共通関数
