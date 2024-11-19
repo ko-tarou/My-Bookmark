@@ -1,11 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
     const todoBoxes = document.querySelectorAll('.todo-box'); // すべてのtodo-boxを取得
 
-    // 各todo-boxに対して独立した動作を設定
     todoBoxes.forEach((box, index) => {
         const todoList = box.querySelector('.todo-list'); // 対応するリストを取得
         const addTaskButton = box.querySelector('.plus-button'); // 対応するボタンを取得
-        const storageKey = `todo-box-${index + 1}`; // 各todo-boxに対応するローカルストレージのキー
+        const titleElement = box.querySelector('.todo-title'); // タイトル要素を取得
+        const storageKey = `todo-box-${index + 1}`; // タスク用のローカルストレージキー
+        const titleStorageKey = `todo-title-${index + 1}`; // タイトル用のローカルストレージキー
 
         // ローカルストレージからタスクをロード
         const loadTasks = () => {
@@ -15,10 +16,23 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         };
 
+        // ローカルストレージからタイトルをロード
+        const loadTitle = () => {
+            const savedTitle = localStorage.getItem(titleStorageKey);
+            if (savedTitle) {
+                titleElement.textContent = savedTitle;
+            }
+        };
+
         // タスクをローカルストレージに保存
         const saveTasks = () => {
             const tasks = Array.from(todoList.querySelectorAll('.todo-item span')).map(span => span.textContent);
             localStorage.setItem(storageKey, JSON.stringify(tasks));
+        };
+
+        // タイトルをローカルストレージに保存
+        const saveTitle = () => {
+            localStorage.setItem(titleStorageKey, titleElement.textContent);
         };
 
         // タスクをリストに追加する共通関数
@@ -51,6 +65,15 @@ document.addEventListener('DOMContentLoaded', () => {
             todoList.appendChild(listItem);
         };
 
+        // タイトルを編集可能にする
+        titleElement.addEventListener('click', () => {
+            const newTitle = prompt(`新しいタイトルを入力してください (Box ${index + 1}):`, titleElement.textContent);
+            if (newTitle !== null) {
+                titleElement.textContent = newTitle.trim();
+                saveTitle(); // ローカルストレージを更新
+            }
+        });
+
         // 新しいタスクを追加
         addTaskButton.addEventListener('click', () => {
             const task = prompt(`新しいタスクを入力してください (Box ${index + 1}):`).trim();
@@ -62,7 +85,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // ページ読み込み時にタスクをロード
+        // ページ読み込み時にタスクとタイトルをロード
         loadTasks();
+        loadTitle();
     });
 });
