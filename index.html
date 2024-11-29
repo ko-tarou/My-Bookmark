@@ -3,11 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>正方形のグリッド</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Bookmark & ToDo</title>
+    <!-- CSSファイルをリンク -->
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/bookmark.css">
+    <link rel="stylesheet" href="css/todo.css">
+    <link rel="stylesheet" href="css/dialog.css">
 </head>
 <body>
+    <!-- ナビゲーションバー -->
+    <div id="nav-bar">
+        <button id="bookmark-button">Bookmark</button>
+        <button id="todo-button">ToDo</button>
+    </div>
+
+    <!-- Bookmarkページ -->
     <div id="grid-container"></div>
+
+    <!-- ToDoリストページ -->
+    <div id="todo-container">
+        <div class="todo-box" id="todo-box-1">
+            <h3 class="todo-title">Todo Box 1</h3> <!-- タイトル用の要素 -->
+            <ul id="todo-list-1" class="todo-list"></ul>
+            <button class="plus-button" id="add-task-button-1">+</button>
+        </div>
+        <div class="todo-box" id="todo-box-2">
+            <h3 class="todo-title">Todo Box 2</h3> <!-- タイトル用の要素 -->
+            <ul id="todo-list-2" class="todo-list"></ul>
+            <button class="plus-button" id="add-task-button-2">+</button>
+        </div>
+        <div class="todo-box" id="todo-box-3">
+            <h3 class="todo-title">Todo Box 3</h3> <!-- タイトル用の要素 -->
+            <ul id="todo-list-3" class="todo-list"></ul>
+            <button class="plus-button" id="add-task-button-3">+</button>
+        </div>
+        <div class="todo-box" id="todo-box-4">
+            <h3 class="todo-title">Todo Box 4</h3> <!-- タイトル用の要素 -->
+            <ul id="todo-list-4" class="todo-list"></ul>
+            <button class="plus-button" id="add-task-button-4">+</button>
+        </div>
+    </div>
+
+    <!-- ダイアログ -->
     <div id="dialog" class="dialog">
         <h2>情報を入力</h2>
         <label for="input-url">URL:</label>
@@ -17,6 +55,13 @@
         <button id="save-button">保存</button>
         <button id="cancel-button">キャンセル</button>
     </div>
-    <script src="script.js"></script>
+
+    <!-- JavaScriptファイルをリンク -->
+    <script src="js/main.js" defer></script>
+    <script src="js/bookmark.js" defer></script>
+    <script src="js/todo/storage.js"></script>
+    <script src="js/todo/domUtils.js"></script>
+    <script src="js/todo/todoList.js"></script>
+    <script src="js/todo/todo.js"></script>
 </body>
 </html>
